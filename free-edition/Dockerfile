@@ -1,4 +1,5 @@
-FROM adoptopenjdk/openjdk11:alpine
+# FROM adoptopenjdk/openjdk11:alpine
+FROM openjdk:11
 
 # Build time arguments
 ARG version=9.1.1
@@ -11,7 +12,7 @@ ENV GRAPHDB_INSTALL_DIR=${GRAPHDB_PARENT_DIR}/dist
 
 ADD graphdb-${edition}-${version}-dist.zip /tmp
 
-RUN apk add --no-cache bash util-linux procps net-tools busybox-extras wget less curl && \
+RUN apt-get update && apt-get install -y bash util-linux procps net-tools busybox wget less curl && \
     mkdir -p ${GRAPHDB_PARENT_DIR} && \
     cd ${GRAPHDB_PARENT_DIR} && \
     unzip /tmp/graphdb-${edition}-${version}-dist.zip && \

@@ -1,7 +1,7 @@
-VERSION=9.1.1
+VERSION=9.10.3
 
 free:
-	docker build --no-cache --pull --build-arg edition=free --build-arg version=${VERSION} -t ontotext/graphdb:${VERSION}-free free-edition
+	docker buildx build --platform linux/amd64,linux/arm64 --build-arg edition=free --build-arg version=${VERSION} -t ghcr.io/ternaustralia/graphdb:${VERSION}-free free-edition --progress=plain --push
 
 ee:
 	docker build --no-cache --pull --build-arg edition=ee --build-arg version=${VERSION} -t ontotext/graphdb:${VERSION}-ee .
